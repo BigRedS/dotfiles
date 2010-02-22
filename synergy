@@ -1,0 +1,11 @@
+section: screens
+	jup-rmt07:
+	jup-linux2:
+end
+
+section: links
+jup-rmt07:
+	left = jup-linux2
+jup-linux2:
+	right = jup-rmt07
+end 
