@@ -1,0 +1,12 @@
+
+deb	http://mirror.ox.ac.uk/debian/	testing	main contrib non-free
+deb-src http://mirror.ox.ac.uk/debian/	testing	main contrib non-free
+
+
+# Security updates
+#deb     http://security.debian.org/ testing/updates  main contrib non-free
+#deb-src http://security.debian.org/ testing/updates  main contrib non-free
+
+#deb http://linux.dropbox.com/ubuntu jaunty main
+#deb-src http://linux.dropbox.com/ubuntu jaunty main
+
