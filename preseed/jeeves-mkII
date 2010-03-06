@@ -1,11 +1,11 @@
 #### Contents of the preconfiguration file
 ### Localization
 # Locale sets language and country.
-d-i debian-installer/locale string en_US
+d-i debian-installer/locale string en_uK
 
 # Keyboard selection.
 #d-i console-tools/archs select at
-d-i console-keymaps-at/keymap select us
+d-i console-keymaps-at/keymap select gb
 # Example for a different keyboard architecture
 #d-i console-keymaps-usb/keymap select mac-usb-us
 
@@ -23,7 +23,7 @@ d-i netcfg/choose_interface select auto
 
 # If you prefer to configure the network manually, uncomment this line and
 # the static network configuration below.
-#d-i netcfg/disable_dhcp boolean true
+d-i netcfg/disable_dhcp boolean true
 
 # If you want the preconfiguration file to work on systems both with and
 # without a dhcp server, uncomment these lines and the static network
@@ -32,16 +32,16 @@ d-i netcfg/choose_interface select auto
 #d-i netcfg/dhcp_options select Configure network manually
 
 # Static network configuration.
-#d-i netcfg/get_nameservers string 192.168.1.1
-#d-i netcfg/get_ipaddress string 192.168.1.42
-#d-i netcfg/get_netmask string 255.255.255.0
-#d-i netcfg/get_gateway string 192.168.1.1
-#d-i netcfg/confirm_static boolean true
+d-i netcfg/get_nameservers string 192.168.1.1
+d-i netcfg/get_ipaddress string 192.168.1.42
+d-i netcfg/get_netmask string 255.255.255.0
+d-i netcfg/get_gateway string 192.168.1.1
+d-i netcfg/confirm_static boolean true
 
 # Any hostname and domain names assigned from dhcp take precedence over
 # values set here. However, setting the values still prevents the questions
 # from being shown, even if values come from dhcp.
-d-i netcfg/get_hostname string unassigned-hostname
+d-i netcfg/get_hostname string jeeves
 d-i netcfg/get_domain string unassigned-domain
 
 # Disable that annoying WEP key dialog.
@@ -51,8 +51,8 @@ d-i netcfg/wireless_wep string
 
 ### Mirror settings
 # If you select ftp, the mirror/country string does not need to be set.
-#d-i mirror/protocol string ftp
-d-i mirror/country string enter information manually
+d-i mirror/protocol string ftp
+#d-i mirror/country string enter information manually
 d-i mirror/http/hostname string http.us.debian.org
 d-i mirror/http/directory string /debian
 d-i mirror/http/proxy string
@@ -74,7 +74,7 @@ d-i mirror/http/proxy string
 d-i partman-auto/disk string /dev/discs/disc0/disc
 # In addition, you'll need to specify the method to use.
 # The presently available methods are: "regular", "lvm" and "crypto"
-d-i partman-auto/method string lvm
+d-i partman-auto/method string regular
 
 # If one of the disks that are going to be automatically partitioned
 # contains an old LVM configuration, the user will normally receive a
@@ -130,7 +130,7 @@ d-i clock-setup/utc boolean true
 
 # You may set this to any valid setting for $TZ; see the contents of
 # /usr/share/zoneinfo/ for valid values.
-d-i time/zone string US/Eastern
+d-i time/zone string GMT
 
 ### Apt setup
 # You can choose to install non-free and contrib software.
@@ -166,17 +166,17 @@ d-i time/zone string US/Eastern
 #d-i passwd/make-user boolean false
 
 # Root password, either in clear text
-#d-i passwd/root-password password r00tme
-#d-i passwd/root-password-again password r00tme
+d-i passwd/root-password password reallysecurepassword
+d-i passwd/root-password-again password reallysecurepassword
 # or encrypted using an MD5 hash.
 #d-i passwd/root-password-crypted password [MD5 hash]
 
 # To create a normal user account.
-#d-i passwd/user-fullname string Debian User
-#d-i passwd/username string debian
+d-i passwd/user-fullname string Avi Greenbury
+d-i passwd/username string avi
 # Normal user's password, either in clear text
-#d-i passwd/user-password password insecure
-#d-i passwd/user-password-again password insecure
+d-i passwd/user-password mildlylesssecurepassword
+d-i passwd/user-password-again mildlylesssecurepassword
 # or encrypted using an MD5 hash.
 #d-i passwd/user-password-crypted password [MD5 hash]
 
@@ -206,18 +206,18 @@ d-i grub-installer/with_other_os boolean true
 #d-i grub-installer/bootdev  string (hd0,0) (hd1,0) (hd2,0)
 
 ### Package selection
-tasksel tasksel/first multiselect standard, desktop
+tasksel tasksel/first multiselect standard
 #tasksel tasksel/first multiselect standard, web-server
 #tasksel tasksel/first multiselect standard, kde-desktop
 
 # Individual additional packages to install
-#d-i pkgsel/include string openssh-server build-essential
+d-i pkgsel/include string openssh-server
 
 # Some versions of the installer can report back on what software you have
 # installed, and what software you use. The default is not to report back,
 # but sending reports helps the project determine what software is most
 # popular and include it on CDs.
-#popularity-contest popularity-contest/participate boolean false
+popularity-contest popularity-contest/participate boolean true
 
 ### Finishing up the first stage install
 # Avoid that last message about the install being complete.
@@ -230,17 +230,17 @@ d-i finish-install/reboot_in_progress note
 ### X configuration
 # X can detect the right driver for some cards, but if you're preseeding,
 # you override whatever it chooses. Still, vesa will work most places.
-#xserver-xorg xserver-xorg/config/device/driver select vesa
+xserver-xorg xserver-xorg/config/device/driver select vesa
 
 # A caveat with mouse autodetection is that if it fails, X will retry it
 # over and over. So if it's preseeded to be done, there is a possibility of
 # an infinite loop if the mouse is not autodetected.
-#xserver-xorg xserver-xorg/autodetect_mouse boolean true
+xserver-xorg xserver-xorg/autodetect_mouse boolean false
 
 # Monitor autodetection is recommended.
 xserver-xorg xserver-xorg/autodetect_monitor boolean true
 # Uncomment if you have an LCD display.
-#xserver-xorg xserver-xorg/config/monitor/lcd boolean true
+xserver-xorg xserver-xorg/config/monitor/lcd boolean true
 # X has three configuration paths for the monitor. Here's how to preseed
 # the "medium" path, which is always available. The "simple" path may not
 # be available, and the "advanced" path asks too many questions.
