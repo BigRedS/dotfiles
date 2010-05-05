@@ -1,0 +1,22 @@
+<VirtualHost *:80>
+	ServerName inet.st-ives.int
+	DocumentRoot /srv/http/mobex/
+
+	CustomLog     /var/log/apache2/example.org-access.log combined
+	ErrorLog      /var/log/apache2/example.org-error.log
+	LogLevel warn
+
+</VirtualHost>
+
+<VirtualHost *:80>
+	ServerName inet
+	DocumentRoot /srv/http/mobex/
+</Virtualhost>
+
+
+<VirtualHost *:443>
+	ServerName inet.st-ives.int
+	DocumentRoot /srv/http/mobex/
+	SSLEngine on
+	SSLCertificateFile /etc/apache2/apache.pem
+</Virtualhost>

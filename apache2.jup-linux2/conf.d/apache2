@@ -1,0 +1,12 @@
+Alias /samba-images /usr/share/smb2www/images
+
+<Location "/cgi-bin/samba">
+        Order deny,allow
+
+# Before uncommenting the following lines please put IP address
+# of your computer in the Allow line
+        # Deny from all
+        # Allow from 127.0.0.0/255.0.0.0 REPLACE-WITH.YOUR-HOST.IP-ADDRESS
+        # Allow from ::1/128
+</Location>
+

@@ -1,0 +1,89 @@
+<VirtualHost *:80>
+	ServerAdmin webmaster@localhost
+
+	DocumentRoot /srv/http
+	<Directory />
+		Options FollowSymLinks
+		AllowOverride None
+	</Directory>
+	<Directory /srv/http>
+		Options Indexes FollowSymLinks MultiViews +ExecCGI
+		AllowOverride None
+		Order allow,deny
+		allow from all
+	</Directory>
+
+	ScriptAlias /cgi-bin/ /srv/http/cgi-bin/
+	<Directory "/srv/http/cgi-bin/">
+		AllowOverride None
+		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+		Order allow,deny
+		Allow from all
+	</Directory>
+
+	ErrorLog /var/log/apache2/error.log
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+
+	CustomLog /var/log/apache2/access.log combined
+
+#	SSLEngine on
+#	SSLCertificateFile /etc/apache2/apache.pem
+
+    Alias /doc/ "/usr/share/doc/"
+    <Directory "/usr/share/doc/">
+        Options Indexes MultiViews FollowSymLinks
+        AllowOverride None
+        Order deny,allow
+        Deny from all
+        Allow from 127.0.0.0/255.0.0.0 ::1/128
+    </Directory>
+
+</VirtualHost>
+
+#<VirtualHost *:443>
+##	ServerAdmin webmaster@localhost
+#
+#	DocumentRoot /srv/http
+#	<Directory />
+#		Options FollowSymLinks
+#		AllowOverride None
+#	</Directory>
+#	<Directory /srv/http>
+#		Options Indexes FollowSymLinks MultiViews
+#		AllowOverride None
+#		Order allow,deny
+#		allow from all
+#	</Directory>
+#
+#	ScriptAlias /cgi-bin/ /srv/http/cgi-bin/
+#	<Directory "/srv/http/cgi-bin/">
+#		AllowOverride None
+#		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+#		Order allow,deny
+#		Allow from all
+#	</Directory>
+#
+#	ErrorLog /var/log/apache2/error.log
+#
+#	# Possible values include: debug, info, notice, warn, error, crit,
+#	# alert, emerg.
+#	LogLevel warn
+#
+#	CustomLog /var/log/apache2/access.log combined
+#
+#	SSLEngine on
+#	SSLCertificateFile /etc/apache2/apache.pem
+#
+# #   Alias /doc/ "/usr/share/doc/"
+#    <Directory "/usr/share/doc/">
+#  #      Options Indexes MultiViews FollowSymLinks
+#        AllowOverride None
+# #       Order deny,allow
+#  #      Deny from all
+##   #     Allow from 127.0.0.0/255.0.0.0 ::1/128
+#    </Directory>
+#
+#</VirtualHost>

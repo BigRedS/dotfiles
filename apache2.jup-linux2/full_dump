@@ -1,0 +1,643 @@
+ServerRoot "/etc/apache2"
+LockFile /var/lock/apache2/accept.lock
+PidFile ${APACHE_PID_FILE}
+Timeout 300
+KeepAlive On
+MaxKeepAliveRequests 100
+KeepAliveTimeout 15
+<IfModule mpm_prefork_module>
+    StartServers          5
+    MinSpareServers       5
+    MaxSpareServers      10
+    MaxClients          150
+    MaxRequestsPerChild   0
+</IfModule>
+<IfModule mpm_worker_module>
+    StartServers          2
+    MinSpareThreads      25
+    MaxSpareThreads      75 
+    ThreadLimit          64
+    ThreadsPerChild      25
+    MaxClients          150
+    MaxRequestsPerChild   0
+</IfModule>
+<IfModule mpm_event_module>
+    StartServers          2
+    MaxClients          150
+    MinSpareThreads      25
+    MaxSpareThreads      75 
+    ThreadLimit          64
+    ThreadsPerChild      25
+    MaxRequestsPerChild   0
+</IfModule>
+User ${APACHE_RUN_USER}
+Group ${APACHE_RUN_GROUP}
+AccessFileName .htaccess
+<Files ~ "^\.">
+    Order allow,deny
+    Deny from all
+</Files>
+DefaultType text/plain
+HostnameLookups Off
+ErrorLog /var/log/apache2/error.log
+LogLevel warn
+LoadModule alias_module /usr/lib/apache2/modules/mod_alias.so
+LoadModule auth_basic_module /usr/lib/apache2/modules/mod_auth_basic.so
+LoadModule authn_file_module /usr/lib/apache2/modules/mod_authn_file.so
+LoadModule authz_default_module /usr/lib/apache2/modules/mod_authz_default.so
+LoadModule authz_groupfile_module /usr/lib/apache2/modules/mod_authz_groupfile.so
+LoadModule authz_host_module /usr/lib/apache2/modules/mod_authz_host.so
+LoadModule authz_user_module /usr/lib/apache2/modules/mod_authz_user.so
+LoadModule autoindex_module /usr/lib/apache2/modules/mod_autoindex.so
+LoadModule cgi_module /usr/lib/apache2/modules/mod_cgi.so
+LoadModule dir_module /usr/lib/apache2/modules/mod_dir.so
+LoadModule env_module /usr/lib/apache2/modules/mod_env.so
+LoadModule mime_module /usr/lib/apache2/modules/mod_mime.so
+LoadModule negotiation_module /usr/lib/apache2/modules/mod_negotiation.so
+LoadModule perl_module /usr/lib/apache2/modules/mod_perl.so
+LoadModule php5_module /usr/lib/apache2/modules/libphp5.so
+LoadModule reqtimeout_module /usr/lib/apache2/modules/mod_reqtimeout.so
+LoadModule rewrite_module /usr/lib/apache2/modules/mod_rewrite.so
+LoadModule setenvif_module /usr/lib/apache2/modules/mod_setenvif.so
+LoadModule ssl_module /usr/lib/apache2/modules/mod_ssl.so
+LoadModule status_module /usr/lib/apache2/modules/mod_status.so
+LoadModule userdir_module /usr/lib/apache2/modules/mod_userdir.so
+<IfModule alias_module>
+Alias /steve "/mnt/scanachrome/swnm"
+<directory "/mnt/scanachrome/swnm">
+	Options Indexes Multiviews FollowSymLinks
+	AllowOverride None
+	Order allow,deny
+	Allow from all
+</directory>
+<Directory "/srv/http/cctv/">
+	Options Indexes Multiviews FollowSymLinks
+	AllowOverride None
+	Order allow,deny
+	Allow from all
+</directory>
+ScriptAlias /cctv/cgi-bin /srv/http/cctv/cgi-bin
+<Directory "/srv/http/cctv/cgi-bin">
+	Options +ExecCGI FollowSymLinks
+</Directory>
+Alias /icons/ "/usr/share/apache2/icons/"
+</IfModule>
+<IfModule mod_autoindex.c>
+IndexOptions FancyIndexing VersionSort HTMLTable NameWidth=* DescriptionWidth=* Charset=UTF-8
+AddIconByEncoding (CMP,/icons/compressed.gif) x-compress x-gzip x-bzip2
+AddIconByType (TXT,/icons/text.gif) text/*
+AddIconByType (IMG,/icons/image2.gif) image/*
+AddIconByType (SND,/icons/sound2.gif) audio/*
+AddIconByType (VID,/icons/movie.gif) video/*
+AddIcon /icons/binary.gif .bin .exe
+AddIcon /icons/binhex.gif .hqx
+AddIcon /icons/tar.gif .tar
+AddIcon /icons/world2.gif .wrl .wrl.gz .vrml .vrm .iv
+AddIcon /icons/compressed.gif .Z .z .tgz .gz .zip
+AddIcon /icons/a.gif .ps .ai .eps
+AddIcon /icons/layout.gif .html .shtml .htm .pdf
+AddIcon /icons/text.gif .txt
+AddIcon /icons/c.gif .c
+AddIcon /icons/p.gif .pl .py
+AddIcon /icons/f.gif .for
+AddIcon /icons/dvi.gif .dvi
+AddIcon /icons/uuencoded.gif .uu
+AddIcon /icons/script.gif .conf .sh .shar .csh .ksh .tcl
+AddIcon /icons/tex.gif .tex
+AddIcon /icons/bomb.gif /core
+AddIcon (SND,/icons/sound2.gif) .ogg
+AddIcon (VID,/icons/movie.gif) .ogm
+AddIcon /icons/back.gif ..
+AddIcon /icons/hand.right.gif README
+AddIcon /icons/folder.gif ^^DIRECTORY^^
+AddIcon /icons/blank.gif ^^BLANKICON^^
+AddIcon /icons/odf6odt-20x22.png .odt
+AddIcon /icons/odf6ods-20x22.png .ods
+AddIcon /icons/odf6odp-20x22.png .odp
+AddIcon /icons/odf6odg-20x22.png .odg
+AddIcon /icons/odf6odc-20x22.png .odc
+AddIcon /icons/odf6odf-20x22.png .odf
+AddIcon /icons/odf6odb-20x22.png .odb
+AddIcon /icons/odf6odi-20x22.png .odi
+AddIcon /icons/odf6odm-20x22.png .odm
+AddIcon /icons/odf6ott-20x22.png .ott
+AddIcon /icons/odf6ots-20x22.png .ots
+AddIcon /icons/odf6otp-20x22.png .otp
+AddIcon /icons/odf6otg-20x22.png .otg
+AddIcon /icons/odf6otc-20x22.png .otc
+AddIcon /icons/odf6otf-20x22.png .otf
+AddIcon /icons/odf6oti-20x22.png .oti
+AddIcon /icons/odf6oth-20x22.png .oth
+DefaultIcon /icons/unknown.gif
+ReadmeName README.html
+HeaderName HEADER.html
+IndexIgnore .??* *~ *# RCS CVS *,v *,t 
+</IfModule>
+<IfModule mod_dir.c>
+          DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm
+</IfModule>
+<IfModule mod_mime.c>
+TypesConfig /etc/mime.types
+AddType application/x-compress .Z
+AddType application/x-gzip .gz .tgz
+AddType application/x-bzip2 .bz2
+AddLanguage am .amh
+AddLanguage ar .ara
+AddLanguage be .be
+AddLanguage bg .bg
+AddLanguage bn .bn
+AddLanguage br .br
+AddLanguage bs .bs
+AddLanguage ca .ca
+AddLanguage cs .cz .cs
+AddLanguage cy .cy
+AddLanguage da .dk
+AddLanguage de .de
+AddLanguage dz .dz
+AddLanguage el .el
+AddLanguage en .en
+AddLanguage eo .eo
+RemoveType  es
+AddLanguage es .es
+AddLanguage et .et
+AddLanguage eu .eu
+AddLanguage fa .fa
+AddLanguage fi .fi
+AddLanguage fr .fr
+AddLanguage ga .ga
+AddLanguage gl .glg
+AddLanguage gu .gu
+AddLanguage he .he
+AddLanguage hi .hi
+AddLanguage hr .hr
+AddLanguage hu .hu
+AddLanguage hy .hy
+AddLanguage id .id
+AddLanguage is .is
+AddLanguage it .it
+AddLanguage ja .ja
+AddLanguage ka .ka
+AddLanguage kk .kk
+AddLanguage km .km
+AddLanguage kn .kn
+AddLanguage ko .ko
+AddLanguage ku .ku
+AddLanguage lo .lo
+AddLanguage lt .lt
+AddLanguage ltz .ltz
+AddLanguage lv .lv
+AddLanguage mg .mg
+AddLanguage mk .mk
+AddLanguage ml .ml
+AddLanguage mr .mr
+AddLanguage ms .msa
+AddLanguage nb .nob
+AddLanguage ne .ne
+AddLanguage nl .nl
+AddLanguage nn .nn
+AddLanguage no .no
+AddLanguage pa .pa
+AddLanguage pl .po
+AddLanguage pt-BR .pt-br
+AddLanguage pt .pt
+AddLanguage ro .ro
+AddLanguage ru .ru
+AddLanguage sa .sa
+AddLanguage se .se
+AddLanguage si .si
+AddLanguage sk .sk
+AddLanguage sl .sl
+AddLanguage sq .sq
+AddLanguage sr .sr
+AddLanguage sv .sv
+AddLanguage ta .ta
+AddLanguage te .te
+AddLanguage th .th
+AddLanguage tl .tl
+RemoveType  tr
+AddLanguage tr .tr
+AddLanguage uk .uk
+AddLanguage ur .ur
+AddLanguage vi .vi
+AddLanguage wo .wo
+AddLanguage xh .xh
+AddLanguage zh-CN .zh-cn
+AddLanguage zh-TW .zh-tw
+AddCharset us-ascii    .ascii .us-ascii
+AddCharset ISO-8859-1  .iso8859-1  .latin1
+AddCharset ISO-8859-2  .iso8859-2  .latin2 .cen
+AddCharset ISO-8859-3  .iso8859-3  .latin3
+AddCharset ISO-8859-4  .iso8859-4  .latin4
+AddCharset ISO-8859-5  .iso8859-5  .cyr .iso-ru
+AddCharset ISO-8859-6  .iso8859-6  .arb .arabic
+AddCharset ISO-8859-7  .iso8859-7  .grk .greek
+AddCharset ISO-8859-8  .iso8859-8  .heb .hebrew
+AddCharset ISO-8859-9  .iso8859-9  .latin5 .trk
+AddCharset ISO-8859-10  .iso8859-10  .latin6
+AddCharset ISO-8859-13  .iso8859-13
+AddCharset ISO-8859-14  .iso8859-14  .latin8
+AddCharset ISO-8859-15  .iso8859-15  .latin9
+AddCharset ISO-8859-16  .iso8859-16  .latin10
+AddCharset ISO-2022-JP .iso2022-jp .jis
+AddCharset ISO-2022-KR .iso2022-kr .kis
+AddCharset ISO-2022-CN .iso2022-cn .cis
+AddCharset Big5        .Big5       .big5 .b5
+AddCharset cn-Big5     .cn-big5
+AddCharset WINDOWS-1251 .cp-1251   .win-1251
+AddCharset CP866       .cp866
+AddCharset KOI8      .koi8
+AddCharset KOI8-E      .koi8-e
+AddCharset KOI8-r      .koi8-r .koi8-ru
+AddCharset KOI8-U      .koi8-u
+AddCharset KOI8-ru     .koi8-uk .ua
+AddCharset ISO-10646-UCS-2 .ucs2
+AddCharset ISO-10646-UCS-4 .ucs4
+AddCharset UTF-7       .utf7
+AddCharset UTF-8       .utf8
+AddCharset UTF-16      .utf16
+AddCharset UTF-16BE    .utf16be
+AddCharset UTF-16LE    .utf16le
+AddCharset UTF-32      .utf32
+AddCharset UTF-32BE    .utf32be
+AddCharset UTF-32LE    .utf32le
+AddCharset euc-cn      .euc-cn
+AddCharset euc-gb      .euc-gb
+AddCharset euc-jp      .euc-jp
+AddCharset euc-kr      .euc-kr
+AddCharset EUC-TW      .euc-tw
+AddCharset gb2312      .gb2312 .gb
+AddCharset iso-10646-ucs-2 .ucs-2 .iso-10646-ucs-2
+AddCharset iso-10646-ucs-4 .ucs-4 .iso-10646-ucs-4
+AddCharset shift_jis   .shift_jis .sjis
+AddHandler type-map var
+AddType text/html .shtml
+AddOutputFilter INCLUDES .shtml
+</IfModule>
+<IfModule mod_negotiation.c>
+LanguagePriority en ca cs da de el eo es et fr he hr it ja ko ltz nl nn no pl pt pt-BR ru sv tr zh-CN zh-TW
+ForceLanguagePriority Prefer Fallback
+</IfModule>
+<IfModule mod_php5.c>
+    <FilesMatch "\.ph(p3?|tml)$">
+	SetHandler application/x-httpd-php
+    </FilesMatch>
+    <FilesMatch "\.phps$">
+	SetHandler application/x-httpd-php-source
+    </FilesMatch>
+    <IfModule mod_userdir.c>
+        <Directory /home/*/public_html>
+            php_admin_value engine Off
+        </Directory>
+    </IfModule>
+</IfModule>
+<IfModule reqtimeout_module>
+RequestReadTimeout header=10-20,minrate=500
+RequestReadTimeout body=10,minrate=500
+</IfModule>
+<IfModule mod_setenvif.c>
+BrowserMatch "Mozilla/2" nokeepalive
+BrowserMatch "MSIE 4\.0b2;" nokeepalive downgrade-1.0 force-response-1.0
+BrowserMatch "RealPlayer 4\.0" force-response-1.0
+BrowserMatch "Java/1\.0" force-response-1.0
+BrowserMatch "JDK/1\.0" force-response-1.0
+BrowserMatch "Microsoft Data Access Internet Publishing Provider" redirect-carefully
+BrowserMatch "MS FrontPage" redirect-carefully
+BrowserMatch "^WebDrive" redirect-carefully
+BrowserMatch "^WebDAVFS/1.[012]" redirect-carefully
+BrowserMatch "^gnome-vfs/1.0" redirect-carefully
+BrowserMatch "^gvfs/1" redirect-carefully
+BrowserMatch "^XML Spy" redirect-carefully
+BrowserMatch "^Dreamweaver-WebDAV-SCM1" redirect-carefully
+BrowserMatch " Konqueror/4" redirect-carefully
+</IfModule>
+<IfModule mod_ssl.c>
+SSLRandomSeed startup builtin
+SSLRandomSeed startup file:/dev/urandom 512
+SSLRandomSeed connect builtin
+SSLRandomSeed connect file:/dev/urandom 512
+AddType application/x-x509-ca-cert .crt
+AddType application/x-pkcs7-crl    .crl
+SSLPassPhraseDialog  builtin
+SSLSessionCache        shmcb:${APACHE_RUN_DIR}/ssl_scache(512000)
+SSLSessionCacheTimeout  300
+SSLMutex  file:${APACHE_RUN_DIR}/ssl_mutex
+SSLCipherSuite HIGH:MEDIUM:!ADH
+SSLProtocol all -SSLv2
+</IfModule>
+<IfModule mod_status.c>
+<Location /server-status>
+    SetHandler server-status
+    Order deny,allow
+    Deny from all
+    Allow from 127.0.0.1 ::1
+</Location>
+</IfModule>
+<IfModule mod_userdir.c>
+	UserDir	website
+        UserDir disabled root
+	<Directory /home/*/website>
+                AllowOverride FileInfo AuthConfig Limit Indexes
+                Options MultiViews Indexes IncludesNoExec FollowSymlinks +ExecCGI
+		AddHandler cgi-script .pl
+                <Limit GET POST OPTIONS>
+                        Order allow,deny
+                        Allow from all
+                </Limit>
+                <LimitExcept GET POST OPTIONS>
+                        Order deny,allow
+                        Deny from all
+                </LimitExcept>
+        </Directory>
+</IfModule>
+NameVirtualHost *:80
+Listen 80
+    # SSL name based virtual hosts are not yet supported, therefore no
+    # NameVirtualHost statement here
+    Listen 443
+LogFormat "%v:%p %h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" vhost_combined
+LogFormat "%h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined
+LogFormat "%h %l %u %t \"%r\" %>s %O" common
+LogFormat "%{Referer}i -> %U" referer
+LogFormat "%{User-agent}i" agent
+CustomLog /var/log/apache2/other_vhosts_access.log vhost_combined
+<Directory "/usr/share/apache2/icons">
+    Options Indexes MultiViews
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+</Directory>
+<Directory /srv/http/dad>
+	Options -ExecCGI
+</Directory>
+<Directory /srv/http/sites>
+	AddHandler cgi-script .pl
+	Options +ExecCGI
+</Directory>
+<Directory /srv/http>
+	AddHandler cgi-script .cgi
+	Options +ExecCGI
+</Directory>
+<Directory /srv/http/files>
+	AddHandler cgi-script .pl
+	Options +ExecCGI
+</Directory>
+<Directory /srv/http/checkpoint>
+	AddHandler cgi-script .pl
+	Options +ExecCGI
+</Directory>
+<Directory /srv/http/dell>
+	AddHandler cgi-script .pl
+	Options +ExecCGI
+</Directory>
+<Directory /srv/http/kbox>
+	AddHandler cgi-script .pl
+	Options +ExecCGI
+</Directory>
+<Directory /srv/http/mobex>
+	AddHandler cgi-script .pl
+	Options +ExecCGI
+</Directory>
+<Directory /srv/http/inet>
+	AddHandler cgi-script .pl
+	Options +ExecCGI
+</Directory>
+<Directory /home/avi/www/avi>
+	Addhandler cgi-script .pl
+	Options +ExecCGI +FollowSymlinks
+</Directory>
+<Directory /srv/http/excel-scripts>
+	AuthUserFile /etc/apache2/.htpasswd
+	AuthGroupFile /dev/null
+	Authname "Here be magic"
+	Authtype Basic
+	require user admin david
+</Directory>
+<Directory /srv/http/pl>
+	AuthUserFile /etc/apache2/.htpasswd
+	AuthGroupFile /dev/null
+	Authname "Perl Archive"
+	Authtype Basic
+	require user admin
+</Directory>
+<Directory /usr/share/mediawiki>
+	AuthUserFile /etc/apache2/.htpasswd
+	AuthGroupFile /dev/null
+	Authname "Wiki"
+	Authtype Basic
+	require user admin
+</Directory>
+<Directory /srv/http/isos>
+	AuthUserFile /etc/apache2/.htpasswd
+	AuthGroupFile /dev/null
+	Authname "CD Image store"
+	Authtype Basic
+	require user admin
+</Directory>
+<Directory /srv/http/sites>
+	AuthUserFile /etc/apache2/.htpasswd
+	AuthGroupFile /dev/null
+	Authname "Site configuration details"
+	Authtype Basic
+	require user admin
+</Directory>
+<Directory /srv/http/walker>
+	AuthUserFile /etc/apache2/.htpasswd
+	AuthGroupFile /dev/null
+	Authname "Steve Walker network usage"
+	Authtype Basic
+	require user admin
+</Directory>
+<Directory /srv/http/monitor>
+	AuthUserFile /etc/apache2/.htpasswd
+	AuthGroupFile /dev/null
+	Authname "Munin Network Monitoring"
+	Authtype Basic
+	require user admin
+</Directory>
+<Directory /srv/http/files>
+        AuthUserFile /etc/apache2/.htpasswd
+        AuthGroupFile /dev/null
+        Authname "Share usage reports"
+        Authtype Basic
+        require user admin
+</Directory>
+Alias /samba-images /usr/share/smb2www/images
+<Location "/cgi-bin/samba">
+        Order deny,allow
+        # Deny from all
+        # Allow from 127.0.0.0/255.0.0.0 REPLACE-WITH.YOUR-HOST.IP-ADDRESS
+        # Allow from ::1/128
+</Location>
+Alias /cacti /usr/share/cacti/site
+<DirectoryMatch /usr/share/cacti/site>
+	Options +FollowSymLinks
+	AllowOverride None
+	order allow,deny
+	allow from all
+	AddType application/x-httpd-php .php
+	php_flag magic_quotes_gpc Off
+	php_flag short_open_tag On
+	php_flag register_globals Off
+	php_flag register_argc_argv On
+	php_flag track_vars On
+	# this setting is necessary for some locales
+	php_value mbstring.func_overload 0
+	php_value include_path .
+	DirectoryIndex index.php
+</DirectoryMatch>
+Alias /javascript /usr/share/javascript/
+<Directory "/usr/share/javascript/">
+	Options FollowSymLinks MultiViews
+</Directory>
+Alias /mediawiki /var/lib/mediawiki
+<Directory /var/lib/mediawiki/>
+	Options +FollowSymLinks
+	AllowOverride All
+	order allow,deny
+	allow from all
+</Directory>
+<Directory /var/lib/mediawiki/config>
+	Options -FollowSymLinks
+	AllowOverride None
+</Directory>
+<Directory /var/lib/mediawiki/upload>
+	Options -FollowSymLinks
+	AllowOverride None
+</Directory>
+Alias /munin /var/cache/munin/www
+<Directory /var/cache/munin/www>
+        Order allow,deny
+        Allow from localhost 127.0.0.0/8 ::1
+        Options None
+	# This file can be used as a .htaccess file, or a part of your apache
+	# config file.
+	#
+	# For the .htaccess file option to work the munin www directory
+	# (/var/cache/munin/www) must have "AllowOverride all" or something 
+	# close to that set.
+	#
+	# AuthUserFile /etc/munin/munin-htpasswd
+	# AuthName "Munin"
+	# AuthType Basic
+	# require valid-user
+	# This next part requires mod_expires to be enabled.
+	#
+	
+	# Set the default expiration time for files to 5 minutes 10 seconds from
+	# their creation (modification) time.  There are probably new files by
+	# that time. 
+	#
+    <IfModule mod_expires.c>
+        ExpiresActive On
+    	ExpiresDefault M310
+    </IfModule>
+</Directory> 
+ScriptAlias /cgi-bin/nagios3 /usr/lib/cgi-bin/nagios3
+ScriptAlias /nagios3/cgi-bin /usr/lib/cgi-bin/nagios3
+Alias /nagios3/stylesheets /etc/nagios3/stylesheets
+Alias /nagios3 /usr/share/nagios3/htdocs
+Alias /nagios /usr/share/nagios3/htdocs
+<DirectoryMatch (/usr/share/nagios3/htdocs|/usr/lib/cgi-bin/nagios3|/etc/nagios3/stylesheets)>
+	Options FollowSymLinks
+	DirectoryIndex index.html
+	AllowOverride AuthConfig
+	Order Allow,Deny
+	Allow From All
+	AuthName "Nagios Access"
+	AuthType Basic
+	AuthUserFile /etc/nagios3/htpasswd.users
+	# nagios 1.x:
+	#AuthUserFile /etc/nagios/htpasswd.users
+	require valid-user
+</DirectoryMatch>
+Alias /phpmyadmin /usr/share/phpmyadmin
+<Directory /usr/share/phpmyadmin>
+	Options Indexes FollowSymLinks
+	DirectoryIndex index.php
+	<IfModule mod_php5.c>
+		AddType application/x-httpd-php .php
+		php_flag magic_quotes_gpc Off
+		php_flag track_vars On
+		php_flag register_globals Off
+		php_value include_path .
+	</IfModule>
+</Directory>
+<Directory /usr/share/phpmyadmin/setup>
+    <IfModule mod_authn_file.c>
+    AuthType Basic
+    AuthName "phpMyAdmin Setup"
+    AuthUserFile /etc/phpmyadmin/htpasswd.setup
+    </IfModule>
+    Require valid-user
+</Directory>
+<Directory /usr/share/phpmyadmin/libraries>
+    Order Deny,Allow
+    Deny from All
+</Directory>
+<Directory /usr/share/phpmyadmin/setup/lib>
+    Order Deny,Allow
+    Deny from All
+</Directory>
+Alias /phpwikidata              /usr/share/phpwiki/
+Alias /wiki/               /usr/share/phpwiki/index.php/
+<Directory /usr/share/phpwiki/>
+    DirectoryIndex index.php
+    Options +FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    allow from all
+</Directory>
+ServerTokens OS
+ServerSignature On
+TraceEnable Off
+<VirtualHost *:80>
+	ServerAdmin webmaster@localhost
+	DocumentRoot /srv/http
+	<Directory />
+		Options FollowSymLinks
+		AllowOverride None
+	</Directory>
+	<Directory /srv/http>
+		Options Indexes FollowSymLinks MultiViews +ExecCGI
+		AllowOverride None
+		Order allow,deny
+		allow from all
+	</Directory>
+	ScriptAlias /cgi-bin/ /srv/http/cgi-bin/
+	<Directory "/srv/http/cgi-bin/">
+		AllowOverride None
+		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+		Order allow,deny
+		Allow from all
+	</Directory>
+	ErrorLog /var/log/apache2/error.log
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+	CustomLog /var/log/apache2/access.log combined
+    Alias /doc/ "/usr/share/doc/"
+    <Directory "/usr/share/doc/">
+        Options Indexes MultiViews FollowSymLinks
+        AllowOverride None
+        Order deny,allow
+        Deny from all
+        Allow from 127.0.0.0/255.0.0.0 ::1/128
+    </Directory>
+</VirtualHost>
+<VirtualHost *:80>
+	ServerName inet.st-ives.int
+	DocumentRoot /srv/http/mobex/
+	CustomLog     /var/log/apache2/example.org-access.log combined
+	ErrorLog      /var/log/apache2/example.org-error.log
+	LogLevel warn
+</VirtualHost>
+<VirtualHost *:80>
+	ServerName inet
+	DocumentRoot /srv/http/mobex/
+</Virtualhost>
+<VirtualHost *:443>
+	ServerName inet.st-ives.int
+	DocumentRoot /srv/http/mobex/
+	SSLEngine on
+	SSLCertificateFile /etc/apache2/apache.pem
+</Virtualhost>
