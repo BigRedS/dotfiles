@@ -1,0 +1,149 @@
+source ~/.bashrc_git_prompt
+
+t(){
+  if tmux list-sessions 2>&1 > /dev/null ; then
+    tmux attach
+  else
+    tmux
+  fi
+}
+
+get_ps1(){
+  # Colour code cheatsheet:
+  # https://www.cyberciti.biz/faq/bash-shell-change-the-color-of-my-shell-prompt-under-linux-or-unix/
+
+      cyan='\[\033[1;36m\]'
+     green='\[\033[0;32m\]'
+     brown='\[\033[0;33m\]'
+    purple='\[\033[0;35m\]'
+  lightred='\[\033[0;31m\]'
+   default='\[\033[00m\]'
+
+  green='\[\033[38;5;40m\]'
+  lightgreen='\[\033[38;5;118m\]'
+  yellow='\[\033[38;5;154m\]'
+  orange='\[\033[38;5;166m\]'
+  purple='\[\033[38;5;201m\]'
+  grey='\[\033[38;5;244m\]'
+
+  hostname=$(hostname);
+  if [[ "$hostname" =~ "eu-west-2.compute.internal" ]]; then
+    hostname='mac/vpn'
+  elif [[ "$hostname" =~ "Mac" ]]; then
+    hostname='mac'
+  fi
+
+  # exit-status in [] followed by brown timestamp in <>s
+  prompt="${grey}[\$?] ${brown}<\t> $grey@$hostname$default"
+
+  branch=$(__git_ps1)
+  if [ -z "$branch" ]; then
+    # user@host in green, then path in cyan
+    #prompt="$prompt ${orange}\u@\h${cyan}:\w"
+    prompt="$prompt ${cyan} \w"
+  else
+    #repo_name=$( git remote -v | awk -F'[/ ]' '/fetch/ {split($5,a,"."); print a[1]}' | grep -v '^$');
+    repo_name=$( git remote -v | grep fetch | awk -F/ '{print $NF}' | awk -F'.git' '{print $1}' )
+    repo_rel_path=$(git rev-parse --show-prefix)
+
+    # light-red branch name, cyan path (per non-gitted prompt)
+    prompt="$prompt ${lightred}${branch} ${orange}$repo_name/${green}$repo_rel_path";
+  fi
+
+  if [ -z "$AWS_DEFAULT_PROFILE" ]; then
+    AWS_DEFAULT_PROFILE="$AWS_PROFILE"
+  fi
+
+  if [ -z "$AWS_PROFILE" ]; then
+    AWS_PROFILE="$AWS_DEFAULT_PROFILE"
+  fi
+
+  if [ -z "$AWS_DEFAULT_REGION" ]; then
+    AWS_DEFAULT_REGION="$AWS_REGION"
+  fi
+
+  if [ -z "$AWS_REGION" ]; then
+    AWS_REGION="$AWS_DEFAULT_REGION"
+  fi
+
+  aws_prompt_suffix=''
+  if [ -n "$AWS_DEFAULT_PROFILE" ]; then
+    if [ -n "$AWS_DEFAULT_REGION" ]; then
+      aws_prompt_suffix="$AWS_DEFAULT_PROFILE@$AWS_DEFAULT_REGION"
+    else
+      aws_prompt_suffix="$AWS_DEFAULT_PROFILE"
+    fi
+  else
+    if [ -n "$AWS_DEFAULT_REGION" ]; then
+      aws_prompt_suffix="$AWS_DEFAULT_REGION"
+    fi
+  fi
+
+  if [ -n "$aws_prompt_suffix" ]; then
+    prompt="$prompt ${grey}[$aws_prompt_suffix]"
+  fi
+
+  prompt="${prompt}${default}\n${orange}$ ${default}";
+  export PS1=$prompt;
+}
+PROMPT_COMMAND=get_ps1
+
+export KREW_ROOT=~/opt/krew
+
+alias g='git'
+alias gl='git log --oneline | head -n15'
+alias gdf='git diff --name-only'
+alias gs='git status --short'
+alias gs='git status'
+alias gd='git diff'
+alias gpush='git push'
+alias gpull='git pull --rebase'
+alias glog='git log'
+alias gco='git checkout'
+alias gcm='git commit'
+alias gad='git add .'
+alias gca='git commit --amend --no-edit'
+alias gpf='git push --force'
+alias gforce='gad ; gca ; gpf'
+
+alias tf='tofu'
+alias tfv='tofu validate'
+alias tfmt='tofu fmt'
+
+alias k='kubectl'
+alias kg='kubectl get'
+alias kd='kubectl describe'
+alias kx='kubectl ctx'
+alias kns='kubectl ns'
+
+alias h='helm'
+alias hls='helm ls --all-namespaces'
+alias hh='helm history'
+
+alias kubectx='kubectl ctx'
+alias kubens='kubectl ns'
+
+alias a='ssh avi.st'
+
+alias less='less -R'
+
+alias d='dig +short'
+alias HEAD='curl  --head'
+alias GET='curl'
+
+alias ls='ls --color'
+alias less='less -R'
+
+export me="$USER:$USER"
+export USERNAME=avi.greenbury
+export VISUAL=vim
+export PATH="$HOME/bin:$HOME/opt/krew/bin/:$PATH"
+
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  source ~/.bashrc_macos
+fi
+
+if [ -f ~/.bashrc_secrets ]; then
+  source ~/.bashrc_secrets
+fi

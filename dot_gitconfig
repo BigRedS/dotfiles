@@ -1,0 +1,9 @@
+[user]
+	name = Avi Greenbury
+	email = ialoneambest@gmail.com
+[help]
+	autocorrect = 1
+[push]
+	autoSetupRemote = true
+[pull]
+	default = current

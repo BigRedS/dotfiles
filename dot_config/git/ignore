@@ -1,0 +1,16 @@
+# https://github.com/github/gitignore/blob/master/Perl.gitignore
+
+*.tmp
+*.bak
+*.2
+
+## Perl Language Server (vs code)
+pls_cache
+
+## vim
+# Swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]

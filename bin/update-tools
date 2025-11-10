@@ -1,0 +1,67 @@
+#! /bin/bash
+
+helm_version='v3.13.0'
+
+# Quick script to install and update the tools that aren't installable
+# easily via apt or flatpak
+
+uname_arch=$(uname -m)
+arch="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
+
+echo "> Kubectl"
+if curl -q -sSL -o ~/bin/kubectl.new -L "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/$arch/kubectl"; then
+  chmod +x ~/bin/kubectl.new
+  mv ~/bin/kubectl.new ~/bin/kubectl
+fi
+
+echo "> Krew"
+# https://krew.sigs.k8s.io/docs/user-guide/setup/install/
+
+(
+  #set -x; 
+  cd "$(mktemp -d)" &&
+  OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
+  KREW="krew-${OS}_${arch}" &&
+  curl -q -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" &&
+  tar zxf "${KREW}.tar.gz" &&
+  ./"${KREW}" install krew
+)
+
+kubectl krew install ctx ns
+kubectl krew upgrade
+
+echo "> Argo"
+if curl -q -sSL -o ~/bin/argocd.new https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-$arch; then
+  chmod +x ~/bin/argocd.new
+  mv ~/bin/argocd.new ~/bin/argocd
+fi
+
+echo "> K9s"
+mkdir -p ~/opt/k9s
+if curl -q -sSL -o ~/opt/k9s/k9s.tar.gz https://github.com/derailed/k9s/releases/latest/download/k9s_Linux_$arch.tar.gz; then
+  cd ~/opt/k9s/
+  tar -xf k9s.tar.gz
+  rm k9s.tar.gz
+  mv k9s ~/bin
+  cd ~
+fi
+
+echo "> Helm"
+mkdir -p ~/opt/helm
+if curl -q -sSL -o ~/opt/helm/helm.tar.gz https://get.helm.sh/helm-${helm_version}-linux-$arch.tar.gz; then
+  cd ~/opt/helm
+  tar -xf helm.tar.gz
+  rm helm.tar.gz
+  mv linux-$arch/helm ~/bin/helm
+fi
+
+# awscli
+mkdir -p ~/opt/aws/unzipped
+if curl -q -o ~/opt/aws/awscli.zip "https://awscli.amazonaws.com/awscli-exe-linux-$uname_arch.zip" ; then
+  if [ -f ~/bin/aws ]; then
+    args=' --update '
+  fi
+  cd ~/opt/aws/unzipped
+  unzip -u ../awscli.zip
+  ./aws/install $args --install-dir ~/opt/aws/ --bin-dir ~/bin
+fi

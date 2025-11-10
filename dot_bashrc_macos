@@ -1,0 +1,15 @@
+if [ -f /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash ]; then
+  . /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
+fi
+
+if [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
+  . /opt/homebrew/opt/asdf/libexec/asdf.sh
+fi
+
+if [ -f /opt/homebrew/bin/aws_completer ]; then
+  complete -C /opt/homebrew/bin/aws_completer aws
+fi
+
+export HOMEBREW_NO_AUTO_UPDATE=2
+
+export PATH="/opt/homebrew/opt/mysql-client/bin:/opt/homebrew/bin/:/opt/homebrew/bin/:$PATH"

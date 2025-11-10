@@ -1,0 +1,23 @@
+syntax on                " syntax highlighting
+set nowrap               " No auto linewrapping
+set number               " Show line numbers
+set numberwidth=3        " Minimum of three columns for line numbers
+set background=dark      " Light-coloured text
+set ls=2                 " Always show status line
+set scrolloff=5          " Keep 5 lines when scrolling
+set title                " Show title in console title bar
+set cmdheight=2          " Command window height
+set ignorecase           " Case-insensitive search...
+set smartcase            " ... except when there's a captial letter in the search string
+set pastetoggle=<F12>    " Toggle between 'paste' and 'nopaste'
+set mouse-=a             " Don't attempt mouse support
+
+set tabstop=2     " tabs are four spaces wide
+set shiftwidth=2  " indent by two-spaces with '>' in visual mode
+set expandtab     " insert space characters when 'tab' is pressed
+
+set dir=/tmp/
+
+" Highlight the line the cursor is currently on, with a black backgroud
+set cursorline
+hi CursorLine cterm=NONE ctermbg=black
