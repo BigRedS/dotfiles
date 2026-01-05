@@ -5,10 +5,6 @@ host avi.st
   user avi
   hostname donkey.avi.st
 
-host hetzner
-  user avi
-  hostname small-vm.avi.st
-
 host nuc
   user avi
   hostname 192.168.0.3

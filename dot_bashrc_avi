@@ -106,9 +106,16 @@ alias gca='git commit --amend --no-edit'
 alias gpf='git push --force'
 alias gforce='gad ; gca ; gpf'
 
-alias tf='tofu'
-alias tfv='tofu validate'
-alias tfmt='tofu fmt'
+
+if which -q terraform 2>/dev/null; then
+  alias tf='terraform'
+  alias tfv='terraform validate'
+  alias tfmt='terraform fmt'
+else
+  alias tf='tofu'
+  alias tfv='tofu validate'
+  alias tfmt='tofu fmt'
+fi
 
 alias k='kubectl'
 alias kg='kubectl get'
