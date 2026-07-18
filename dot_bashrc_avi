@@ -107,7 +107,7 @@ alias gpf='git push --force'
 alias gforce='gad ; gca ; gpf'
 
 
-if which -q terraform 2>/dev/null; then
+if which -s terraform 2>/dev/null; then
   alias tf='terraform'
   alias tfv='terraform validate'
   alias tfmt='terraform fmt'
@@ -144,7 +144,7 @@ alias less='less -R'
 export me="$USER:$USER"
 export USERNAME=avi.greenbury
 export VISUAL=vim
-export PATH="$HOME/bin:$HOME/opt/krew/bin/:$PATH"
+export PATH="$HOME/bin:$HOME/opt/krew/bin/:$PATH:$HOME/.local/bin"
 
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -153,4 +153,8 @@ fi
 
 if [ -f ~/.bashrc_secrets ]; then
   source ~/.bashrc_secrets
+fi
+
+if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
 fi
