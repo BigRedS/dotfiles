@@ -1,8 +1,9 @@
 # Agent instructions
 
 Personal, cross-project instructions for any AI coding agent working with me
-(Avi) - Claude Code, Codex, or anything else that reads `AGENTS.md`.
-Machine- or repo-specific detail belongs in that repo's own
+(Avi
+
+Machine- or repo-specific detail belongs in that repo's own 
 `CLAUDE.md`/README, not here - this file is for things true everywhere.
 
 ## Safety and permissions
@@ -19,16 +20,22 @@ Machine- or repo-specific detail belongs in that repo's own
   an unwanted outage or lockout isn't.
 - Before destructive git operations, check status/diff first and
   stash/ask rather than assuming it's safe to discard something.
-- When you find unexpected privileged or security-relevant config on a
-  system, trace its actual origin (package ownership, timestamps, known
-  OS/imaging defaults) before assuming automation put it there.
+- Before editing files in a git repo, check for uncommitted changes and prompt
+  the user to commit before making edits
+- Don't take a question of whether something is possible as an instruction to
+  make it possible. "is the disk still mounted" isn't an instruction to mount
+  the disk, "can I still use the old UI" isn't an instruction to recreate the
+  old UI  
 
 ## How I like to work
 
-- Prefer simple, low-ceremony solutions over "correct but heavy" ones.
-  Don't build abstractions, extra config layers, or generalized frameworks
-  for a need that's currently one instance - copy-paste-and-diverge is
-  fine until duplication actually hurts.
+- Prefer simple and understandable over correct-but-heavy ones
+- Optimise for human efficiency over computational efficiency; it is more
+  important that code, systems etc. be easily reasoned about and easily picked
+  up after months away than that some CPU cycles or memory allocations are saved
+- Don't over-optimise on interfaces; no need for abstractions, extra config
+  layers or whole frameworks for one or two instances. Copy-paste is fine until
+  it testably isn't
 - Verify claims before presenting something as done: test scripts,
   templates, regexes, filter/module behaviour, etc. against realistic
   input rather than trusting your read of the semantics - especially
@@ -42,7 +49,28 @@ Machine- or repo-specific detail belongs in that repo's own
   gotchas discovered the hard way, so the next pass doesn't rediscover them.
 - Ask before big irreversible or scope-expanding decisions (new
   dependencies, architectural changes, new accounts/credentials). Fine to
-  proceed without checking in on straightforward, reversible steps.
+  proceed without checking in on straightforward, reversible steps. This
+  extends to smaller subjective/architectural choices with more than one
+  reasonable answer (module boundaries, naming, which library, how much to
+  generalise a shared bit of code) - ask explicitly rather than pick for me,
+  even when no single choice is "big" on its own. A structured multiple-choice
+  question works well for these.
+- Prefer explicit data/dependency passing (e.g. threading a DB handle through
+  as a function argument) over framework "magic" - globals, ambient context,
+  DI-container-style lookups - even when the framework offers a shorter way.
+  Explicit is easier to test, read, and reuse outside the framework's request
+  lifecycle.
+- In tests, prefer exercising a real dependency (e.g. an actual database via
+  Docker Compose) over mocking it. A mock can quietly drift from how the real
+  thing behaves; a real instance can't lie to you the same way.
+- When fixing a bug, add a regression test for it alongside the fix, not just
+  the fix on its own.
+- For a substantial rework (new architecture, new stack, big refactor):
+  prefer settling the big decisions fully up front - written down, before any
+  code - then build the actual implementation incrementally, piece by piece.
+  Don't treat "we agreed the plan" as "go implement all of it now" - expect a
+  pause between the plan being written and it being greenlit, and wait for an
+  explicit go-ahead rather than proceeding straight through.
 
 ## Technology choices
 
@@ -75,3 +103,7 @@ Machine- or repo-specific detail belongs in that repo's own
 - State trade-offs and consequences plainly (what breaks, what's now
   reachable/unreachable, what needs a follow-up), not just the happy path
   - but keep it to the point, not an essay.
+- If you think my framing or initial ask is wrong, say so and give your
+  actual recommendation instead of deferring to how I first put it. I'd
+  rather hear the honest revised answer, backed by reasoning, than have you
+  agree with my first framing and build the wrong thing carefully.
