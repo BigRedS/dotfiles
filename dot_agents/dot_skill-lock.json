@@ -1,0 +1,206 @@
+{
+  "version": 3,
+  "skills": {
+    "coralogix-docs": {
+      "source": "coralogix/cx-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coralogix/cx-cli.git",
+      "skillPath": "skills/coralogix-docs/SKILL.md",
+      "skillFolderHash": "334f430beb7eef0d6d83a05e13e7a18409d2356b",
+      "installedAt": "2026-08-10T21:20:59.352Z",
+      "updatedAt": "2026-09-06T09:36:15.326Z"
+    },
+    "cx-ai-center": {
+      "source": "coralogix/cx-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coralogix/cx-cli.git",
+      "skillPath": "skills/cx-ai-center/SKILL.md",
+      "skillFolderHash": "50eb8739d99964af82f7f9f132d9b5edbb31c5f0",
+      "installedAt": "2026-08-10T21:20:59.361Z",
+      "updatedAt": "2026-09-06T09:36:15.330Z"
+    },
+    "cx-alerts": {
+      "source": "coralogix/cx-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coralogix/cx-cli.git",
+      "skillPath": "skills/cx-alerts/SKILL.md",
+      "skillFolderHash": "38d9869198f1934dd8d6dc91c5d70db93c6f2803",
+      "installedAt": "2026-08-10T21:20:59.364Z",
+      "updatedAt": "2026-09-06T09:36:15.331Z"
+    },
+    "cx-cases": {
+      "source": "coralogix/cx-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coralogix/cx-cli.git",
+      "skillPath": "skills/cx-cases/SKILL.md",
+      "skillFolderHash": "273af11f4b43270f498d21a5c6f95eeabca99e42",
+      "installedAt": "2026-08-10T21:20:59.368Z",
+      "updatedAt": "2026-09-06T09:36:15.333Z"
+    },
+    "cx-cli": {
+      "source": "coralogix/cx-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coralogix/cx-cli.git",
+      "skillPath": "skills/cx-cli/SKILL.md",
+      "skillFolderHash": "28cf1de6bc21439782e62a54a2ddeebb33c287bd",
+      "installedAt": "2026-08-10T21:20:59.371Z",
+      "updatedAt": "2026-09-06T09:36:15.335Z"
+    },
+    "cx-cost-optimization": {
+      "source": "coralogix/cx-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coralogix/cx-cli.git",
+      "skillPath": "skills/cx-cost-optimization/SKILL.md",
+      "skillFolderHash": "e171f85b9cfb6a4785e32027906cf80a022c11d3",
+      "installedAt": "2026-08-10T21:20:59.374Z",
+      "updatedAt": "2026-09-06T09:36:15.337Z"
+    },
+    "cx-dashboards": {
+      "source": "coralogix/cx-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coralogix/cx-cli.git",
+      "skillPath": "skills/cx-dashboards/SKILL.md",
+      "skillFolderHash": "8fa904fe89a8fefc93e6d0d8788e89f2e9f17f73",
+      "installedAt": "2026-08-10T21:20:59.378Z",
+      "updatedAt": "2026-09-06T09:36:15.339Z"
+    },
+    "cx-data-pipeline": {
+      "source": "coralogix/cx-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coralogix/cx-cli.git",
+      "skillPath": "skills/cx-data-pipeline/SKILL.md",
+      "skillFolderHash": "4f3bb9fab1f7ed1486505af99ecd817844ae7784",
+      "installedAt": "2026-08-10T21:20:59.381Z",
+      "updatedAt": "2026-09-06T09:36:15.340Z"
+    },
+    "cx-infra": {
+      "source": "coralogix/cx-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coralogix/cx-cli.git",
+      "skillPath": "skills/cx-infra/SKILL.md",
+      "skillFolderHash": "711f011acaa62cee64b83523faa9d66d3758b0ac",
+      "installedAt": "2026-08-10T21:20:59.386Z",
+      "updatedAt": "2026-09-06T09:36:15.343Z"
+    },
+    "cx-observability-setup": {
+      "source": "coralogix/cx-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coralogix/cx-cli.git",
+      "skillPath": "skills/cx-observability-setup/SKILL.md",
+      "skillFolderHash": "b31a138f12cd31c4d615b4831bc73be2ce96c408",
+      "installedAt": "2026-08-10T21:20:59.391Z",
+      "updatedAt": "2026-09-06T09:36:15.345Z"
+    },
+    "cx-olly": {
+      "source": "coralogix/cx-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coralogix/cx-cli.git",
+      "skillPath": "skills/cx-olly/SKILL.md",
+      "skillFolderHash": "74b3604f9936c0ce7251bf6b48ea2cc9075eac1e",
+      "installedAt": "2026-08-10T21:20:59.395Z",
+      "updatedAt": "2026-09-06T09:36:15.347Z"
+    },
+    "cx-platform-admin": {
+      "source": "coralogix/cx-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coralogix/cx-cli.git",
+      "skillPath": "skills/cx-platform-admin/SKILL.md",
+      "skillFolderHash": "a05e7897dc50df67d09d864e7cf97cf092306c75",
+      "installedAt": "2026-08-10T21:20:59.398Z",
+      "updatedAt": "2026-09-06T09:36:15.349Z"
+    },
+    "cx-search-dashboard": {
+      "source": "coralogix/cx-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coralogix/cx-cli.git",
+      "skillPath": "skills/cx-search-dashboard/SKILL.md",
+      "skillFolderHash": "5344216c39458baa25fa930538c7f0a765a413a4",
+      "installedAt": "2026-08-10T21:20:59.402Z",
+      "updatedAt": "2026-09-06T09:36:15.350Z"
+    },
+    "cx-service-catalog": {
+      "source": "coralogix/cx-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coralogix/cx-cli.git",
+      "skillPath": "skills/cx-service-catalog/SKILL.md",
+      "skillFolderHash": "3cd22cf98250cf5aa21214de5b42194432a74391",
+      "installedAt": "2026-08-10T21:20:59.405Z",
+      "updatedAt": "2026-09-06T09:36:15.352Z"
+    },
+    "cx-slos": {
+      "source": "coralogix/cx-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coralogix/cx-cli.git",
+      "skillPath": "skills/cx-slos/SKILL.md",
+      "skillFolderHash": "34c089eb776dc9351dca83dfe7d7ba026fcf21b8",
+      "installedAt": "2026-08-10T21:20:59.409Z",
+      "updatedAt": "2026-09-06T09:36:15.353Z"
+    },
+    "cx-telemetry-querying": {
+      "source": "coralogix/cx-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coralogix/cx-cli.git",
+      "skillPath": "skills/cx-telemetry-querying/SKILL.md",
+      "skillFolderHash": "984f197938ad62637c5b1a6325068da52a3cd158",
+      "installedAt": "2026-08-10T21:20:59.412Z",
+      "updatedAt": "2026-09-06T09:36:15.355Z"
+    },
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/skills.git",
+      "skillPath": "skills/find-skills/SKILL.md",
+      "skillFolderHash": "76a98a285cb0434f3d39e1a873823556330e398b",
+      "installedAt": "2026-09-06T17:52:47.689Z",
+      "updatedAt": "2026-09-06T17:52:47.689Z"
+    },
+    "perl-patterns": {
+      "source": "affaan-m/ecc",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/affaan-m/ecc.git",
+      "skillPath": "skills/perl-patterns/SKILL.md",
+      "skillFolderHash": "6b41d4b3a3a0281e550e6c0fbd8e24ba3c86e1fb",
+      "installedAt": "2026-09-06T17:54:44.766Z",
+      "updatedAt": "2026-09-06T17:54:44.766Z"
+    },
+    "perl-security": {
+      "source": "affaan-m/ecc",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/affaan-m/ecc.git",
+      "skillPath": "skills/perl-security/SKILL.md",
+      "skillFolderHash": "26b29f0509b7b558b26dfc43f3f05d51feb5e2a1",
+      "installedAt": "2026-09-06T17:55:09.039Z",
+      "updatedAt": "2026-09-06T17:55:09.039Z"
+    },
+    "write-concisely": {
+      "source": "neolabhq/context-engineering-kit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/neolabhq/context-engineering-kit.git",
+      "skillPath": "skills/write-concisely/SKILL.md",
+      "skillFolderHash": "b8542851000e0a8b150774ef536ccc2e62fe3199",
+      "installedAt": "2026-09-06T20:26:52.239Z",
+      "updatedAt": "2026-09-06T20:27:58.411Z"
+    },
+    "code-comments": {
+      "source": "petekp/claude-code-setup",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/petekp/claude-code-setup.git",
+      "skillPath": "skills/code-comments/SKILL.md",
+      "skillFolderHash": "ccb02bb96e6109fe9c73e08e6a519b100c83f65c",
+      "installedAt": "2026-09-06T20:27:34.320Z",
+      "updatedAt": "2026-09-06T20:28:01.910Z"
+    },
+    "teach-me": {
+      "source": "citypaul/.dotfiles",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/citypaul/.dotfiles.git",
+      "skillPath": "claude/.claude/skills/teach-me/SKILL.md",
+      "skillFolderHash": "faaf4e5e68369c7c8d2d2424adb2bbe8652b92c5",
+      "installedAt": "2026-09-06T20:28:58.706Z",
+      "updatedAt": "2026-09-06T20:28:58.706Z"
+    }
+  },
+  "dismissed": {
+    "findSkillsPrompt": true
+  }
+}
