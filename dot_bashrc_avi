@@ -146,6 +146,7 @@ export USERNAME=avi.greenbury
 export VISUAL=vim
 export PATH="$HOME/.local/bin:$HOME/bin:$HOME/opt/krew/bin/:$PATH"
 
+export ENTE_CLI_SECRETS_PATH="~/.ente-secrets"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   source ~/.bashrc_macos
