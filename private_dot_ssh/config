@@ -1,10 +1,17 @@
-host * 
+Host merlin
+  HostName 192.168.0.4
+
+Host fgm
+  Hostname 192.168.0.8
+
+Host avi.st
+  HostName donkey.avi.st
+
+Host nuc
+  HostName 192.168.0.3
+
+Host lintendo
+  Hostname 192.168.0.27
+
+Host *
   User avi
-
-host avi.st
-  user avi
-  hostname donkey.avi.st
-
-host nuc
-  user avi
-  hostname 192.168.0.3
