@@ -1,109 +1,76 @@
 # Agent instructions
 
-Personal, cross-project instructions for any AI coding agent working with me
-(Avi
-
-Machine- or repo-specific detail belongs in that repo's own 
-`CLAUDE.md`/README, not here - this file is for things true everywhere.
+Cross-project preferences for any AI coding agent working with me (Avi).
+Repo-specific detail belongs in that repo's own `AGENTS.md`
 
 ## Safety and permissions
 
-- Never let a run escalate privileges (sudo/root/cloud IAM/etc.) unattended
-  - every privileged action needs a human physically present to type a
-  password or confirm, in the moment. If that's inconvenient, the fix is a
-  better session-scoped workflow (e.g. a wrapper that prompts once per
-  session), not storing or bypassing the credential.
-- Treat anything hard to reverse, or that touches a shared/live system, as
-  worth a pause: confirm before restarting services, changing firewall
-  rules, editing sshd/sudoers, force-pushing, deleting infrastructure, etc.
-  - even when you're confident it's right. A quick confirmation is cheap;
-  an unwanted outage or lockout isn't.
-- Before destructive git operations, check status/diff first and
-  stash/ask rather than assuming it's safe to discard something.
-- Before editing files in a git repo, check for uncommitted changes and prompt
-  the user to commit before making edits
-- Don't take a question of whether something is possible as an instruction to
-  make it possible. "is the disk still mounted" isn't an instruction to mount
-  the disk, "can I still use the old UI" isn't an instruction to recreate the
-  old UI  
+- Never escalate privileges (sudo, root, cloud IAM, etc.) unattended; a
+  human must type a password or confirm each time, in the moment. If that's
+  painful, build a session-scoped workflow (e.g. a wrapper that prompts once
+  per session) - never store or bypass the credential.
+- Confirm before anything hard to reverse, scope-expanding, or touching a
+  shared/live system - restarting services, firewall/sshd/sudoers changes,
+  force-pushing, deleting infrastructure, new dependencies, architectural
+  changes, new accounts/credentials - even when confident. A confirmation is
+  cheap; an outage or lockout isn't. Straightforward reversible steps don't
+  need a check-in.
+- In a git repo, check status/diff first. If there are uncommitted changes,
+  ask me to commit or stash before you edit; ask rather than discard.
+- A question isn't an instruction: "is the disk still mounted" doesn't mean
+  mount it; "can I still use the old UI" doesn't mean recreate it.
 
 ## How I like to work
 
-- Prefer simple and understandable over correct-but-heavy ones
-- Optimise for human efficiency over computational efficiency; it is more
-  important that code, systems etc. be easily reasoned about and easily picked
-  up after months away than that some CPU cycles or memory allocations are saved
-- Don't over-optimise on interfaces; no need for abstractions, extra config
-  layers or whole frameworks for one or two instances. Copy-paste is fine until
-  it testably isn't
-- Verify claims before presenting something as done: test scripts,
-  templates, regexes, filter/module behaviour, etc. against realistic
-  input rather than trusting your read of the semantics - especially
-  anything security- or infra-adjacent. Catching your own bug is worth an
-  extra round-trip; handing me broken code with confidence isn't.
-- When something behaves unexpectedly, check current/authoritative state
-  (config, source, the running system, actual docs) rather than relying on
-  memory of how it "should" work.
-- Document *why*, not *what* - code/config usually explains what it does.
-  Comments and READMEs are for hidden constraints, subtle invariants, and
-  gotchas discovered the hard way, so the next pass doesn't rediscover them.
-- Ask before big irreversible or scope-expanding decisions (new
-  dependencies, architectural changes, new accounts/credentials). Fine to
-  proceed without checking in on straightforward, reversible steps. This
-  extends to smaller subjective/architectural choices with more than one
-  reasonable answer (module boundaries, naming, which library, how much to
-  generalise a shared bit of code) - ask explicitly rather than pick for me,
-  even when no single choice is "big" on its own. A structured multiple-choice
-  question works well for these.
-- Prefer explicit data/dependency passing (e.g. threading a DB handle through
-  as a function argument) over framework "magic" - globals, ambient context,
-  DI-container-style lookups - even when the framework offers a shorter way.
-  Explicit is easier to test, read, and reuse outside the framework's request
-  lifecycle.
-- In tests, prefer exercising a real dependency (e.g. an actual database via
-  Docker Compose) over mocking it. A mock can quietly drift from how the real
-  thing behaves; a real instance can't lie to you the same way.
-- When fixing a bug, add a regression test for it alongside the fix, not just
-  the fix on its own.
-- For a substantial rework (new architecture, new stack, big refactor):
-  prefer settling the big decisions fully up front - written down, before any
-  code - then build the actual implementation incrementally, piece by piece.
-  Don't treat "we agreed the plan" as "go implement all of it now" - expect a
-  pause between the plan being written and it being greenlit, and wait for an
-  explicit go-ahead rather than proceeding straight through.
+- Optimise for my ability to understand it months later, not for
+  CPU/memory or generality. No abstractions, config layers or frameworks for
+  one or two instances; copy-paste is fine until it testably isn't.
+- For subjective choices with more than one reasonable answer (module
+  boundaries, naming, library, how far to generalise), ask rather than pick
+  for me - a multiple-choice question works well.
+- Verify before calling something done: test anything testable against
+  realistic input rather than trusting your read of the semantics,
+  especially security/infra. Catching your own bug is worth an extra
+  round-trip; handing me broken code with confidence isn't.
+- When something behaves unexpectedly, check authoritative state (config,
+  source, the running system, actual docs), not memory of how it "should"
+  work.
+- Comments and docs explain *why* - hidden constraints, invariants, gotchas
+  learned the hard way - noti *what*.
+- READMEs exist primarily for humans wondering what some dirctory contains
+  and how to use it, not as a record of mistakes an agent made. Where 
+  appropriate, note those down in a per-project AGENTS.md file. Create it if 
+  necessary.
+- Pass data/dependencies explicitly (e.g. a DB handle as an argument) over
+  framework magic (globals, ambient context, DI lookups); it's easier to
+  test, read and reuse.
+- In tests, use real dependencies (e.g. a database via Docker Compose) over
+  mocks; mocks drift from reality.
+- Bug fixes come with a regression test if the codebase has tests.
+- Big reworks: write down and settle the major decisions before any code,
+  then **wait for an explicit go-ahead** before building it incrementally. An
+  agreed plan is not a green light.
 
 ## Technology choices
 
-- Prefer full-length file extensions over legacy MS-DOS 8.3-style
-  abbreviations wherever a tool/ecosystem genuinely allows either - e.g.
-  `.yaml` not `.yml` - except where a tool or convention specifically
-  requires the short form.
-- Prefer old-and-proven technology over new-and-fashionable, all else
-  equal. Boring and battle-tested beats novel and exciting.
-- Prefer open-source/free software I can self-host and control over a
-  free-tier or freemium SaaS product, even when the SaaS option is
-  genuinely free - the point is control and freedom, not just price.
-  Mentioning a compelling low-freedom-but-no-cost option is fine, but
-  expect me to usually pass on it in favour of the FOSS route.
-- Assume whatever problem I'm describing has probably already been solved
-  by an existing piece of free software. Before writing new code, look for
-  something that already does it, and identify the actual delta between
-  what it offers and what I've asked for - don't jump straight to writing
-  bespoke software.
+- Full-length file extensions where the tool allows (`.yaml`, not `.yml`).
+- Old and proven over new and fashionable, all else equal.
+- Self-hostable FOSS over free-tier/freemium SaaS; control matters more than
+  price. Mention a compelling SaaS option, but expect me to pick FOSS.
+- Assume the problem is already solved by existing free software. Look for
+  it first and identify the delta from what I asked for before writing
+  bespoke code.
 
 ## Communication
 
-- Default terse. Skip preamble, don't restate what was just asked, don't
-  pad with caveats or explanatory asides unless they change what I'd do
-  next. Go deeper only when asked, or when a decision genuinely turns on
+- Explain and describe options, but don't try to persuade
+- Default terse: no preamble, no restating the ask, no caveats unless they
+  change what I'd do next. Go deeper when asked or when a decision turns on
   the detail.
-- Comfortable with technical depth on networking, Linux internals,
-  Kubernetes, etc. when it's actually warranted - terse doesn't mean
-  dumbed down, it means cut the parts that don't carry weight.
-- State trade-offs and consequences plainly (what breaks, what's now
-  reachable/unreachable, what needs a follow-up), not just the happy path
-  - but keep it to the point, not an essay.
-- If you think my framing or initial ask is wrong, say so and give your
-  actual recommendation instead of deferring to how I first put it. I'd
-  rather hear the honest revised answer, backed by reasoning, than have you
-  agree with my first framing and build the wrong thing carefully.
+- Technical depth (networking, Linux internals, Kubernetes, etc.) is fine
+  when warranted - terse means cutting what doesn't carry weight, not
+  dumbing down.
+- State trade-offs and consequences plainly (what breaks, what becomes
+  reachable/unreachable, what needs follow-up), briefly.
+- If my framing or ask is wrong, say so and give your actual recommendation
+  with reasoning, rather than carefully building the wrong thing.
