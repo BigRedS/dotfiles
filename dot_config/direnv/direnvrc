@@ -1,0 +1,13 @@
+# Point KUBECONFIG at ~/.kube/<name>.yaml, defaulting <name> to the current
+# directory's basename. Used from a repo's .envrc as: use kubeconfig
+# (or: use kubeconfig some-other-name)
+use_kubeconfig() {
+  local name="${1:-$(basename "$PWD")}"
+  local kubeconfig="$HOME/.kube/${name}.yaml"
+  if [[ -f "$kubeconfig" ]]; then
+    export KUBECONFIG="$kubeconfig"
+    log_status "KUBECONFIG=$kubeconfig"
+  else
+    log_error "use_kubeconfig: no kubeconfig for '$name' at $kubeconfig"
+  fi
+}
