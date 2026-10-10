@@ -146,9 +146,21 @@ export USERNAME=avi.greenbury
 export VISUAL=vim
 export PATH="$HOME/.local/bin:$HOME/bin:$HOME/opt/krew/bin/:$PATH"
 
+if [ -d /home/avi/.opencode ]; then
+  export PATH=/home/avi/.opencode/bin:$PATH
+fi
+
+# Per-cluster kubeconfigs (~/.kube/<name>.yaml); repo .envrc files narrow
+# this to one cluster via `use kubeconfig` (see ~/.config/direnv/direnvrc).
+export KUBECONFIG="$HOME/.kube/duloc.yaml:$HOME/.kube/farfaraway.yaml"
+
 export ENTE_CLI_SECRETS_PATH="~/.ente-secrets"
 
 function md(){ (pandoc "$1" | w3m -T text/html) }
+
+if which direnv >/dev/null 2>&1; then
+  eval "$(direnv hook bash)"
+fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   source ~/.bashrc_macos
