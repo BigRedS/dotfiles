@@ -148,6 +148,8 @@ export PATH="$HOME/.local/bin:$HOME/bin:$HOME/opt/krew/bin/:$PATH"
 
 export ENTE_CLI_SECRETS_PATH="~/.ente-secrets"
 
+function md(){ (pandoc "$1" | w3m -T text/html) }
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
   source ~/.bashrc_macos
 fi
