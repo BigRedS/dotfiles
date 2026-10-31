@@ -74,3 +74,19 @@ Repo-specific detail belongs in that repo's own `AGENTS.md`
   reachable/unreachable, what needs follow-up), briefly.
 - If my framing or ask is wrong, say so and give your actual recommendation
   with reasoning, rather than carefully building the wrong thing.
+
+## Plans and work log
+
+Each project has a notes dir at `~/notes/computers/<repo>/`, where `<repo>` is
+the git repo's directory name (`basename "$(git rev-parse --show-toplevel)"`).
+Create it if missing. If not in a repo, ask which dir to use.
+
+- **Plans**: write any substantial plan to `plans/YYYY-MM-DD-<slug>.md` in
+  that dir before implementing, and update it if the plan changes. This is
+  in addition to any tool-internal plan file.
+- **Log**: append to `log.md` in that dir, newest at the bottom, one dated
+  entry (`## YYYY-MM-DD`) per session with short bullets. Log major decisions
+  (and why), actions on live infrastructure (restarts, firewall/DNS/IAM
+  changes, deploys, deletions), and anything left half-done. Skip routine
+  code edits; git has those.
+- Never put secrets in either.
