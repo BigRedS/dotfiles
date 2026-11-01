@@ -13,5 +13,10 @@ Host nuc
 Host lintendo
   Hostname 192.168.0.27
 
+host ha
+  User root
+  Identityfile ~/.ssh/id_ed25519_passphrased
+  Hostname homeassistant.local
+
 Host *
   User avi
