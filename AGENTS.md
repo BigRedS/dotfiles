@@ -50,6 +50,8 @@ Repo-specific detail belongs in that repo's own `AGENTS.md`
 - Big reworks: write down and settle the major decisions before any code,
   then **wait for an explicit go-ahead** before building it incrementally. An
   agreed plan is not a green light.
+- Do not make git changes without my explicit instruction; I will expect to
+  write my own commits as part of my process of understanding what we've done.
 
 ## Technology choices
 
