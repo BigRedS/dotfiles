@@ -1,0 +1,6 @@
+{{- /* Asked once at `chezmoi init`; answer is kept in ~/.config/chezmoi/chezmoi.toml.
+       Non-interactive overrides are keyed by the prompt text, not the data key:
+         chezmoi init --promptBool 'Work machine=true' */ -}}
+{{- $work := promptBoolOnce . "work" "Work machine" -}}
+[data]
+    work = {{ $work }}

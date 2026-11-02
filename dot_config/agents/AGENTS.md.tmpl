@@ -111,6 +111,8 @@ Machine- or repo-specific detail belongs in that repo's own
   rather hear the honest revised answer, backed by reasoning, than have you
   agree with my first framing and build the wrong thing carefully.
 
+
+{{- if not .work }}
 ## Plans and work log
 
 Each project has a notes dir at `~/notes/computers/<repo>/`, where `<repo>` is
@@ -126,4 +128,5 @@ Create it if missing. If not in a repo, ask which dir to use.
   changes, deploys, deletions), and anything left half-done. Skip routine
   code edits; git has those.
 - Never put secrets in either.
+{{- end }}
 
