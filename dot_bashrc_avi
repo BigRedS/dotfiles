@@ -31,6 +31,8 @@ get_ps1(){
     hostname='mac/vpn'
   elif [[ "$hostname" =~ "Mac" ]]; then
     hostname='mac'
+  elif [[ "$hostname" =~ "MBP" ]]; then
+    hostname='mac'
   fi
 
   # exit-status in [] followed by brown timestamp in <>s
