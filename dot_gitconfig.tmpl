@@ -9,3 +9,15 @@
 	default = current
 [init]
 	defaultBranch = main
+{{- /* Only sign where this machine has a key; gpgsign with no key makes every commit fail. */}}
+{{- $sigkey := joinPath .chezmoi.homeDir ".ssh/id_ed25519.pub" }}
+{{- if stat $sigkey }}
+[gpg]
+	format = ssh
+[user]
+	signingkey = {{ $sigkey }}
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+{{- end }}
