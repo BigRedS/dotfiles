@@ -21,3 +21,19 @@ set dir=/tmp/
 " Highlight the line the cursor is currently on, with a black backgroud
 set cursorline
 hi CursorLine cterm=NONE ctermbg=black
+
+
+""" Language-server linting (especially for CodeRabbit yamls)
+
+" ALE (cloned by .chezmoiexternal.toml) needs filetype detection on
+filetype plugin on
+
+" Validate .coderabbit.yaml against its schema. The glob is matched by yaml-language-server, not vim;
+" the schema is fetched on first use.
+let g:ale_linters = {'yaml': ['yaml-language-server', 'yamllint']}
+let g:ale_yaml_ls_config = {'yaml': {'schemas': {'https://coderabbit.ai/integrations/schema.v2.json': '**/.coderabbit.yaml'}}}
+" Swap these to make it only lint on saving (else it does it as you type which is slow on networked volumes)
+" let g:ale_lint_on_text_changed = 'never'
+" let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_text_changed = 'always'
+let g:ale_lint_on_insert_leave = 1

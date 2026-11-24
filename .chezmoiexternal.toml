@@ -1,0 +1,8 @@
+# For ALE for vim linting, especially of Coderabbit YAMLs
+#
+# .vim/pack works on vim 8+ so no need to manage plugins, this is just a checked out git repo
+# refreshPeriod is how often `chezmoi apply` re-pulls; 168h is a week
+[".vim/pack/plugins/start/ale"]
+    type = "git-repo"
+    url = "https://github.com/dense-analysis/ale.git"
+    refreshPeriod = "168h"
