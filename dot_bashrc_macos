@@ -15,3 +15,5 @@ export HOMEBREW_NO_AUTO_UPDATE=2
 export PATH="/opt/homebrew/opt/mysql-client/bin:/opt/homebrew/bin/:/opt/homebrew/bin/:$PATH"
 
 alias mp='multipass'
+
+alias lm='limactl'

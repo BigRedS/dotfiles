@@ -148,6 +148,8 @@ function dud(){ (find "$1" -maxdepth 1 -type d -exec du -sh {} \;) }
 
 alias less='less -R'
 
+alias cr=coderabbit
+
 export me="$USER:$USER"
 export USERNAME=avi.greenbury
 export VISUAL=vim
