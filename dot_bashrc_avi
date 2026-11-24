@@ -45,7 +45,7 @@ get_ps1(){
     prompt="$prompt ${cyan} \w"
   else
     #repo_name=$( git remote -v | awk -F'[/ ]' '/fetch/ {split($5,a,"."); print a[1]}' | grep -v '^$');
-    repo_name=$( git remote -v | grep fetch | awk -F/ '{print $NF}' | awk -F'.git' '{print $1}' )
+    repo_name=$( git remote -v | grep fetch | awk -F/ '{print $NF}' | awk -F'.git' '{print $1}' | head -n1 )
     repo_rel_path=$(git rev-parse --show-prefix)
 
     # light-red branch name, cyan path (per non-gitted prompt)
