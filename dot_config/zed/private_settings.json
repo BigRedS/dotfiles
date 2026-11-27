@@ -1,0 +1,51 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "session": {
+    "trust_all_worktrees": true
+  },
+  "vim_mode": true,
+  "terminal": {
+    "font_size": 15.0,
+    "font_family": "ubuntu mono",
+    "option_as_meta": true
+  },
+  "base_keymap": "VSCode",
+  "show_signature_help_after_edits": false,
+  "auto_signature_help": false,
+  "minimap": {
+    "show": "always"
+  },
+  "cursor_shape": "block",
+  "buffer_font_family": "ubuntu mono",
+  "file_scan_exclusions": [
+    "*swp",
+    "..."
+  ],
+  "file_types": {
+    "html": [
+      "*.tt"
+    ]
+  },
+  "completions": {
+    "words": "disabled"
+  },
+  "show_whitespaces": "boundary",
+  "show_edit_predictions": false,
+  "ensure_final_newline_on_save": true,
+  "soft_wrap": "editor_width",
+  "tab_size": 2,
+  "ui_font_size": 16,
+  "buffer_font_size": 14.0,
+  "theme": {
+    "mode": "system",
+    "light": "Ayu Light",
+    "dark": "Ayu Dark",
+  },
+}
